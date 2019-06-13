@@ -23,3 +23,9 @@ build:
         name: python unit test
         code: |
           python app_test.py
+  after-steps:
+    - sherzberg/slack-notify:
+        subdomain: sub_domain
+        token: $SLACK_API_TOKEN
+        username: wercker
+        channel: "#wercker"
