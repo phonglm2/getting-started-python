@@ -24,10 +24,7 @@ build:
         code: |
           python app_test.py
   after-steps:
-    - sherzberg/slack-notify:
-        token: $SLACK_API_TOKEN
-        subdomain: sub_domain
-        failed_message: Build failed
-        passed_message: Build Passed
+    - shoya/slack-notifier@1.5.0:
+        url: $SLACK_API_TOKEN
         username: phonglm2
         channel: "#wercker"
