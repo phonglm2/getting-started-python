@@ -24,9 +24,8 @@ build:
         code: |
           python app_test.py
   after-steps:
-    - install-packages:
-        packages: ruby
-    - wantedly/pretty-slack-notify:
-        webhook_url: $SLACK_API_TOKEN
+    - slack-notifier:
+        url: $SLACK_API_TOKEN
         channel: wercker
         username: werckerbot
+    
