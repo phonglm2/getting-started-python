@@ -24,6 +24,8 @@ build:
         code: |
           python app_test.py
   after-steps:
+    - install-packages:
+        packages: curl
     - slack-notifier:
         url: $SLACK_API_TOKEN
         channel: wercker
