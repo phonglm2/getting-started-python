@@ -1,5 +1,4 @@
-{
-   "containerDefinitions": [ 
+[ 
       { 
          "essential": true,
          "image": "phonglm2/wercker-frontend",
@@ -12,12 +11,4 @@
             }
          ]
       }
-   ],
-   "cpu": "256",
-   "family": "wercker-poc-task-definition",
-   "memory": "512",
-   "networkMode": "awsvpc",
-   "requiresCompatibilities": [ 
-       "FARGATE" 
-    ]
-}
+   ]
