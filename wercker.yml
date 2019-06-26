@@ -54,7 +54,7 @@ deploy:
 
   aws-ecs:
     steps:
-      - scripts:
+      - script:
           name: copy
           code: mkdir /app && cp wercker-app.json /app/
       - tonnu/aws-ecs:
