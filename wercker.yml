@@ -28,7 +28,7 @@ test:
 build:
   steps:
     - pip-install
-    - scripts:
+    - script:
         name: copy artifacts
         code: |
           cp wercker-app.json app.py requirements.txt $WERCKER_OUTPUT_DIR
