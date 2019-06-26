@@ -50,6 +50,13 @@ push-to-docker:
         repository: phonglm2/wercker-frontend
         cmd: "python /pipeline/source/app.py"
         port: 5001
+  after-steps:
+    - install-packages:
+        packages: curl
+    - slack-notifier:
+        url: $SLACK_API_TOKEN
+        channel: wercker
+        username: werckerbot
 
 deploy-aws-ecs:
   steps:
@@ -60,9 +67,9 @@ deploy-aws-ecs:
         key: $AWS_ACCESS_KEY
         secret: $AWS_SECRET_KEY
         region: ap-northeast-1
-        cluster-name: wercker-poc
-        service-name: werckerci
-        task-definition-name: werckerci-poc
+        cluster-name: default
+        service-name: wercker-poc-service
+        task-definition-name: werckerci-poc-task-definition
         task-definition-file: /app/wercker-app.json
         minimum-running-tasks: 1
   after-steps:
