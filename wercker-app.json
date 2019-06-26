@@ -1,15 +1,23 @@
-[
-    {
-      "portMappings": [
-        {
-          "hostPort": 80,
-          "protocol": "tcp",
-          "containerPort": 5001
-        }
-      ],
-      "cpu": 10,
-      "memory": 500,
-      "image": "phonglm2/wercker-frontend",
-      "name": "wercker-poc"
-    }
-  ]
+{
+   "containerDefinitions": [ 
+      { 
+         "essential": true,
+         "image": "phonglm2/wercker-frontend",
+         "name": "wercker-poc",
+         "portMappings": [ 
+            { 
+               "containerPort": 5001,
+               "hostPort": 5001,
+               "protocol": "tcp"
+            }
+         ]
+      }
+   ],
+   "cpu": "256",
+   "family": "wercker-poc-task-definition",
+   "memory": "512",
+   "networkMode": "awsvpc",
+   "requiresCompatibilities": [ 
+       "FARGATE" 
+    ]
+}
