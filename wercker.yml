@@ -47,7 +47,7 @@ push-to-docker:
     - internal/docker-push:
         username: $DOCKER_USER
         password: $DOCKER_PASS
-        repository: wercker/frontend
+        repository: phonglm2/wercker-frontend
         cmd: "python /pipeline/source/app.py"
         port: 5001
 
