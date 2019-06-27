@@ -6,7 +6,7 @@
          "portMappings": [ 
             { 
                "containerPort": 5001,
-               "hostPort": 5001,
+               "hostPort": 0,
                "protocol": "tcp"
             }
          ]
