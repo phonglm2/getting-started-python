@@ -9,39 +9,27 @@ dev:
     - internal/watch:
         code: python app.py
         reload: true
+#  after-steps:
+#    - install-packages:
+#        packages: curl
+#    - slack-notifier:
+#        url: $SLACK_API_TOKEN
+#        channel: wercker
+#        username: werckerbot
         
-test:
+build:
   steps:
     - pip-install
     - script:
         name: python unit test
         code: |
           python app_test.py
-  after-steps:
-    - install-packages:
-        packages: curl
-    - slack-notifier:
-        url: $SLACK_API_TOKEN
-        channel: wercker
-        username: werckerbot
-
-build:
-  steps:
-    - pip-install
     - script:
         name: copy artifacts
         code: |
           cp wercker-app.json app.py requirements.txt $WERCKER_OUTPUT_DIR
-  after-steps:
-    - install-packages:
-        packages: curl
-    - slack-notifier:
-        url: $SLACK_API_TOKEN
-        channel: wercker
-        username: werckerbot
 
 push-to-docker:
-  box: python:2.7-slim
   steps:
     - pip-install
     - internal/docker-push:
@@ -49,34 +37,20 @@ push-to-docker:
         password: $DOCKER_PASS
         repository: phonglm2/wercker-frontend
         cmd: "python /pipeline/source/app.py"
-        port: 80
-  after-steps:
-    - install-packages:
-        packages: curl
-    - slack-notifier:
-        url: $SLACK_API_TOKEN
-        channel: wercker
-        username: werckerbot
+        ports: "80"
 
-deploy-aws-ecs:
-  steps:
-    - script:
-        name: copy
-        code: mkdir /app && cp wercker-app.json /app/
-    - tonnu/aws-ecs:
-        key: $AWS_ACCESS_KEY
-        secret: $AWS_SECRET_KEY
-        region: ap-northeast-1
-        cluster-name: default
-        service-name: wercker-poc-service
-        task-definition-name: wercker-poc-task-definition
-        task-definition-file: /app/wercker-app.json
-        minimum-running-tasks: 1
-  after-steps:
-    - install-packages:
-        packages: curl
-    - slack-notifier:
-        url: $SLACK_API_TOKEN
-        channel: wercker
-        username: werckerbot
+#deploy-aws-ecs:
+#  steps:
+#    - script:
+#        name: copy
+#        code: mkdir /app && cp wercker-app.json /app/
+#    - tonnu/aws-ecs:
+#        key: $AWS_ACCESS_KEY
+#        secret: $AWS_SECRET_KEY
+#        region: ap-northeast-1
+#        cluster-name: default
+#        service-name: wercker-poc-service
+#        task-definition-name: wercker-poc-task-definition
+#        task-definition-file: /app/wercker-app.json
+#        minimum-running-tasks: 1
 
