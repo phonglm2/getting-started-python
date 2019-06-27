@@ -9,6 +9,8 @@
                "hostPort": 0,
                "protocol": "tcp"
             }
-         ]
+         ],
+         "memory": 500,
+         "cpu": 10
       }
    ]
