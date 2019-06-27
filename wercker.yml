@@ -53,4 +53,3 @@ deploy-aws-ecs:
         task-definition-name: wercker-poc-task-definition
         task-definition-file: /app/wercker-app.json
         minimum-running-tasks: 1
-
