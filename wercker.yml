@@ -9,13 +9,13 @@ dev:
     - internal/watch:
         code: python app.py
         reload: true
-#  after-steps:
-#    - install-packages:
-#        packages: curl
-#    - slack-notifier:
-#        url: $SLACK_API_TOKEN
-#        channel: wercker
-#        username: werckerbot
+  after-steps:
+    - install-packages:
+        packages: curl
+    - slack-notifier:
+        url: $SLACK_API_TOKEN
+        channel: wercker
+        username: werckerbot
         
 build:
   steps:
