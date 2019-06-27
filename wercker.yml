@@ -1,7 +1,7 @@
 box:
   id: python:2.7-slim
   ports:
-    - "5001"
+    - "80"
 
 dev:
   steps:
@@ -49,7 +49,7 @@ push-to-docker:
         password: $DOCKER_PASS
         repository: phonglm2/wercker-frontend
         cmd: "python /pipeline/source/app.py"
-        port: 5001
+        port: 80
   after-steps:
     - install-packages:
         packages: curl
