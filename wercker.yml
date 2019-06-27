@@ -37,20 +37,20 @@ push-to-docker:
         password: $DOCKER_PASS
         repository: phonglm2/wercker-frontend
         cmd: "python /pipeline/source/app.py"
-        ports: "80"
+        ports: 80
 
-#deploy-aws-ecs:
-#  steps:
-#    - script:
-#        name: copy
-#        code: mkdir /app && cp wercker-app.json /app/
-#    - tonnu/aws-ecs:
-#        key: $AWS_ACCESS_KEY
-#        secret: $AWS_SECRET_KEY
-#        region: ap-northeast-1
-#        cluster-name: default
-#        service-name: wercker-poc-service
-#        task-definition-name: wercker-poc-task-definition
-#        task-definition-file: /app/wercker-app.json
-#        minimum-running-tasks: 1
+deploy-aws-ecs:
+  steps:
+    - script:
+        name: copy
+        code: mkdir /app && cp wercker-app.json /app/
+    - tonnu/aws-ecs:
+        key: $AWS_ACCESS_KEY
+        secret: $AWS_SECRET_KEY
+        region: ap-northeast-1
+        cluster-name: default
+        service-name: wercker-service
+        task-definition-name: wercker-poc-task-definition
+        task-definition-file: /app/wercker-app.json
+        minimum-running-tasks: 1
 
