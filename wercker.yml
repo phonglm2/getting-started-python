@@ -28,6 +28,13 @@ build:
         name: copy artifacts
         code: |
           cp wercker-app.json app.py requirements.txt $WERCKER_OUTPUT_DIR
+  after-steps:
+    - install-packages:
+        packages: curl
+    - slack-notifier:
+        url: $SLACK_API_TOKEN
+        channel: wercker
+        username: werckerbot
 
 push-to-docker:
   steps:
@@ -38,6 +45,13 @@ push-to-docker:
         repository: phonglm2/wercker-frontend
         cmd: "python /pipeline/source/app.py"
         ports: 80
+  after-steps:
+    - install-packages:
+        packages: curl
+    - slack-notifier:
+        url: $SLACK_API_TOKEN
+        channel: wercker
+        username: werckerbot
 
 deploy-aws-ecs:
   steps:
@@ -53,3 +67,10 @@ deploy-aws-ecs:
         task-definition-name: wercker-poc-task-definition
         task-definition-file: /app/wercker-app.json
         minimum-running-tasks: 1
+  after-steps:
+    - install-packages:
+        packages: curl
+    - slack-notifier:
+        url: $SLACK_API_TOKEN
+        channel: wercker
+        username: werckerbot
